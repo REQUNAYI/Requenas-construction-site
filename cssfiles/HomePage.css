@@ -1,4 +1,176 @@
-h1 {
-    color: darkblue;
-    text-align: center;
+/* HomePage.css — site shell styles */
+
+/* Design tokens */
+:root{
+  --bg: #f8fafc;            /* page background */
+  --card: #ffffff;          /* surfaces */
+  --text: #0f172a;          /* primary text */
+  --muted: #475569;         /* secondary text */
+  --brand: #2563eb;         /* brand/accents */
+  --brand-600:#1d4ed8;
+  --ring:  37 99 235;       /* for focus rings */
+  --shadow: 0 10px 30px rgba(2,6,23,0.08);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1220;
+    --card:#0f172a;
+    --text:#e5e7eb;
+    --muted:#a1a1aa;
+    --brand:#3b82f6;
+    --brand-600:#2563eb;
+    --shadow: 0 10px 30px rgba(0,0,0,0.45);
+  }
+}
+
+/* Base reset */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(37,99,235,0.06), transparent 60%),
+              radial-gradient(900px 500px at 120% 10%, rgba(99,102,241,0.06), transparent 55%),
+              var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Page layout */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(148,163,184,0.25);
+  padding: 1.1rem 1.25rem;
+  text-align: center; /* Center header text */
+}
+@media (prefers-color-scheme: dark){
+  header{ background: rgba(15,23,42,0.6); }
+}
+
+header h1{
+  margin:0;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+nav{
+  display:flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  justify-content: center; /* Center nav links */
+  padding: .75rem 1.25rem 1.1rem;
+  background: transparent;
+  border-bottom: 1px solid rgba(148,163,184,0.2);
+}
+
+/* Modern link pills with underline animation */
+nav a{
+  position: relative;
+  display:inline-block;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  padding: .55rem .9rem;
+  border-radius: .75rem;
+  transition: transform .15s ease, background-color .25s ease, color .25s ease;
+}
+nav a::after{
+  content:"";
+  position:absolute;
+  left: .9rem;
+  right: .9rem;
+  bottom: .35rem;
+  height: 2px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+  opacity: .9;
+}
+nav a:hover{
+  background: rgba(37,99,235,0.08);
+  transform: translateY(-1px);
+}
+nav a:hover::after{
+  transform: scaleX(1);
+}
+nav a:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(var(--ring)/.35);
+}
+
+/* Make Calculator link pop out */
+nav a:last-child {
+  background: var(--brand);
+  color: white;
+  border-radius: .75rem;
+  padding: .55rem 1rem;
+}
+nav a:last-child:hover {
+  background: var(--brand-600);
+}
+nav a:last-child::after { display: none; }
+
+/* Main content card */
+main{
+  max-width: 980px;
+  margin: 2rem auto;
+  padding: 1.25rem;
+}
+
+main h2{
+  margin: 0 0 .35rem 0;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  letter-spacing: .2px;
+}
+
+main p{
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.2vw, 1.075rem);
+}
+
+main > .hero,
+main > section,
+main > article{
+  background: var(--card);
+  border: 1px solid rgba(148,163,184,0.18);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.25rem;
+}
+
+/* Footer */
+footer{
+  max-width: 980px;
+  margin: 2rem auto 3rem;
+  color: var(--muted);
+  padding: 0 1.25rem;
+  border-top: 1px dashed rgba(148,163,184,0.35);
+  padding-top: 1rem;
+  text-align: center;
+  font-size: .95rem;
+}
+
+/* Utilities */
+.container { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+.center { display:grid; place-items:center; }
+
+/* Responsive tweaks */
+@media (max-width: 640px){
+  nav{
+    gap: .5rem;
+  }
+  nav a{
+    padding: .5rem .75rem;
+    border-radius: .65rem;
+  }
+  main{ margin: 1.25rem auto; }
 }
